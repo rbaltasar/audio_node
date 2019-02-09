@@ -56,7 +56,7 @@ std::string generate_tmp_filename()
 //script, with the following structure: <filename> "<text>""
 std::string generate_command(std::string filename, std::string text)
 {
-  std::string command = "python download_TTS.py ";
+  std::string command = "python /home/pi/Projects/audio_node/download_TTS.py ";
   command += filename;
   command += " \"";
   command += text;
@@ -87,10 +87,15 @@ std::string generate_random_index(json& j, std::string event, std::string person
 int main (int argc, const char *argv[])
 {
 
+  std::cout << argv[0] << std::endl;
+  std::cout << argv[1] << std::endl;
+  std::cout << argv[2] << std::endl;
+
+
   try
   {
     //Delete named mutex. Only in case of permanent block.
-    //boost::interprocess::named_mutex::remove("my_mutex");
+    //boost::interprocess::named_mutex::remove("audio_node_mutex");
 
     //Command line variables
     std::string text_given;
@@ -112,10 +117,10 @@ int main (int argc, const char *argv[])
     notify(vm);
 
     //Open or create the named mutex
-    boost::interprocess::named_mutex mutex(boost::interprocess::open_or_create, "my_mutex");
+    boost::interprocess::named_mutex mutex(boost::interprocess::open_or_create, "audio_node_mutex");
 
     //Parse JSON file
-    std::ifstream i("messages_list.json");
+    std::ifstream i("/home/pi/Projects/audio_node/messages_list.json");
     json j;
     i >> j;
 

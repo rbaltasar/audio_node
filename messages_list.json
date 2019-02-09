@@ -108,7 +108,7 @@
       "amount_of_sentences": 1,
       "0": {
         "mode": "music",
-        "text": "song.mp3"
+        "text": "/home/pi/Projects/audio_node/song.mp3"
       }
     },
     "cris":
@@ -116,7 +116,7 @@
       "amount_of_sentences": 1,
       "0": {
         "mode": "music",
-        "text": "song2.mp3"
+        "text": "/home/pi/Projects/audio_node/song2.mp3"
       }
     },
     "generic":
@@ -124,7 +124,7 @@
       "amount_of_sentences": 1,
       "0": {
         "mode": "music",
-        "text": "song3.mp3"
+        "text": "/home/pi/Projects/audio_node/song3.mp3"
       }
     }
   }
