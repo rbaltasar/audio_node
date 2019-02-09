@@ -1,0 +1,131 @@
+{
+  "hello":
+  {
+    "raul":
+    {
+      "amount_of_sentences": 3,
+      "0": {
+        "mode": "TTS",
+        "text": "Bienvenido a Casa Raúl"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Cuánto tiempo sin verte Raúl!"
+      },
+      "2": {
+        "mode": "TTS",
+        "text": "Hola Raúl, me alegra que vuelvas a casa"
+      }
+    },
+    "cris":
+    {
+      "amount_of_sentences": 3,
+      "0": {
+        "mode": "TTS",
+        "text": "Bienvenida a Casa Cristina"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Cuánto tiempo sin verte Cristina!"
+      },
+      "2": {
+        "mode": "TTS",
+        "text": "Hola Cristina, me alegra que vuelvas a casa"
+      }
+    },
+    "generic":
+    {
+      "amount_of_sentences": 3,
+      "0": {
+        "mode": "TTS",
+        "text": "Bienvenido a casa"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Hola!"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Hola de nuevo!"
+      }
+    }
+  },
+  "goodbye":
+  {
+    "raul":
+    {
+      "amount_of_sentences": 3,
+      "0": {
+        "mode": "TTS",
+        "text": "Hasta luego Raúl"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Adiós Raúl"
+      },
+      "2": {
+        "mode": "TTS",
+        "text": "Nos vemos más tarde Raúl"
+      }
+    },
+    "cris":
+    {
+      "amount_of_sentences": 3,
+      "0": {
+        "mode": "TTS",
+        "text": "Hasta luego Cristina"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Adiós Cristina"
+      },
+      "2": {
+        "mode": "TTS",
+        "text": "Nos vemos más tarde Cristina"
+      }
+    },
+    "generic":
+    {
+      "amount_of_sentences": 3,
+      "0": {
+        "mode": "TTS",
+        "text": "Adiós"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Hasta luego!"
+      },
+      "2": {
+        "mode": "TTS",
+        "text": "Chao!"
+      }
+    }
+  },
+  "wakeup":
+  {
+    "raul":
+    {
+      "amount_of_sentences": 1,
+      "0": {
+        "mode": "music",
+        "text": "song.mp3"
+      }
+    },
+    "cris":
+    {
+      "amount_of_sentences": 1,
+      "0": {
+        "mode": "music",
+        "text": "song2.mp3"
+      }
+    },
+    "generic":
+    {
+      "amount_of_sentences": 1,
+      "0": {
+        "mode": "music",
+        "text": "song3.mp3"
+      }
+    }
+  }
+}
