@@ -3,7 +3,7 @@
   {
     "raul":
     {
-      "amount_of_sentences": 3,
+      "amount_of_sentences": 4,
       "0": {
         "mode": "TTS",
         "text": "Bienvenido a Casa Raúl"
@@ -15,7 +15,12 @@
       "2": {
         "mode": "TTS",
         "text": "Hola Raúl, me alegra que vuelvas a casa"
+      },
+      "3": {
+        "mode": "music",
+        "text": "/home/raul/Projects/audio_node/sounds/song4.mp3"
       }
+
     },
     "cris":
     {
@@ -26,7 +31,7 @@
       },
       "1": {
         "mode": "TTS",
-        "text": "Cuánto tiempo sin verte Cristina!"
+        "text": "Cuánto tiempo sin verte Cristina! Deja de tirarte pedos"
       },
       "2": {
         "mode": "TTS",
@@ -44,7 +49,7 @@
         "mode": "TTS",
         "text": "Hola!"
       },
-      "1": {
+      "2": {
         "mode": "TTS",
         "text": "Hola de nuevo!"
       }
@@ -108,7 +113,7 @@
       "amount_of_sentences": 1,
       "0": {
         "mode": "music",
-        "text": "song.mp3"
+        "text": "/home/raul/Projects/audio_node/sounds/song.mp3"
       }
     },
     "cris":
@@ -116,7 +121,7 @@
       "amount_of_sentences": 1,
       "0": {
         "mode": "music",
-        "text": "song2.mp3"
+        "text": "/home/raul/Projects/audio_node/sounds/song2.mp3"
       }
     },
     "generic":
@@ -124,7 +129,7 @@
       "amount_of_sentences": 1,
       "0": {
         "mode": "music",
-        "text": "song3.mp3"
+        "text": "//home/raul/Projects/audio_node/sounds/song3.mp3"
       }
     }
   }
