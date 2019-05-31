@@ -1,6 +1,7 @@
 #include <boost/interprocess/sync/scoped_lock.hpp>
 #include <boost/interprocess/sync/named_mutex.hpp>
 #include <boost/program_options.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include "json/single_include/nlohmann/json.hpp"
 #include <fstream>
 #include <iostream>
@@ -16,7 +17,7 @@
 using namespace boost::program_options;
 using json = nlohmann::json;
 
-#define ABSOLUTE_AUDIO_PATH "/home/raul/Projects/audio_node/sounds"
+#define ABSOLUTE_AUDIO_PATH "/home/pi/Projects/audio_node/sounds/"
 
 //Reproduce audio using mpg321 player
 //The execution is process-safe: only one process at a time can access the audio resource
@@ -27,7 +28,9 @@ void play_audio(std::string audio_file, boost::interprocess::named_mutex& mutex)
   try
   {
     //Lock named mutex
+    std::cout << "Trying to adquire Mutex" << std::endl;
     boost::interprocess::scoped_lock<boost::interprocess::named_mutex> lock(mutex);
+    std::cout << "Mutex adquired" << std::endl;
 
     //Play the audio file
     std::cout << "Playing: " << audio_file << std::endl;
@@ -47,7 +50,8 @@ void play_audio(std::string audio_file, boost::interprocess::named_mutex& mutex)
 //to the same resource during file download
 std::string generate_tmp_filename()
 {
-  std::string tmp_filename = std::to_string((int)getpid());
+  std::string tmp_filename = ABSOLUTE_AUDIO_PATH;
+  tmp_filename += std::to_string((int)getpid());
   tmp_filename += ".mp3";
   std::cout << "Generated temporary filename: " << tmp_filename << std::endl;
 
@@ -58,7 +62,7 @@ std::string generate_tmp_filename()
 //script, with the following structure: <filename> "<text>""
 std::string generate_command(std::string filename, std::string text)
 {
-  std::string command = "python download_TTS.py ";
+  std::string command = "python /home/pi/Projects/audio_node/download_TTS.py ";
   command += filename;
   command += " \"";
   command += text;
@@ -88,7 +92,6 @@ std::string generate_random_index(json& j, std::string event, std::string person
 std::string generate_persistant_filename(std::string event, std::string person, std::string idx)
 {
   std::string filename = ABSOLUTE_AUDIO_PATH;
-  filename += "/";
   filename += event;
   filename += "_";
   filename += person;
@@ -127,6 +130,38 @@ void remove_and_download(json& j,std::string event, std::string person)
   }
 }
 
+void generate_guest(json& j,std::string event, std::string person_name)
+{
+  std::string person = "guest";
+  //Get amount of entries
+  auto num_entries = j[event.c_str()][person.c_str()]["amount_of_sentences"];
+
+  //Loop over all the entries
+  for(uint8_t i=0; i < num_entries; i++)
+  {
+    //Get the entry text
+    auto idx = std::to_string(i);
+    std::string text = j[event.c_str()][person.c_str()][idx.c_str()]["text"];
+    std::cout << "Processing entry: " << text << std::endl;
+
+    //Replace template by guest name
+    boost::replace_all(text, "<guest_name>", person_name);
+
+    std::cout << "Processed entry: " << text << std::endl;
+
+    //Generate the audio name based on the entry:
+    auto filename = generate_persistant_filename(event,person,idx);
+    //Remove the old audio file if existing
+    std::cout << "  Removing old file" << std::endl;
+    remove(filename.c_str());
+    //Generate python command for audio download
+    auto command = generate_command(filename,text);
+    //Call python script to download the audio file
+    std::cout << "  Downloading new file" << std::endl;
+    system(command.c_str());
+  }
+}
+
 void update_files(json& j,std::string event)
 {
   //Update the files for Raul
@@ -137,6 +172,17 @@ void update_files(json& j,std::string event)
   remove_and_download(j, event,"generic");
 }
 
+void publish_topic(std::string topic_name)
+{
+
+  std::string command = "python /home/pi/Projects/audio_node/mqtt_sender.py ";
+  command += topic_name;
+  
+  std::cout << "Running command: " << command << std::endl;
+
+  system(command.c_str());
+
+}
 
 int main (int argc, const char *argv[])
 {
@@ -148,6 +194,7 @@ int main (int argc, const char *argv[])
 
     //Command line variables
     std::string text_given;
+    std::string guest_name;
     std::string audio_file;
     std::string event;
     std::string person;
@@ -157,6 +204,7 @@ int main (int argc, const char *argv[])
     desc.add_options()
       ("help,h", "Help screen")
       ("text,t", value<std::string>(&text_given), "Text to translate to speech (TTS)")
+      ("guest,g", value<std::string>(&guest_name), "Guest name")
       ("filename,f", value<std::string>(&audio_file), "Name of audio file to play")
       ("person,p", value<std::string>(&person), "Person assigned to the event [raul,cris,generic]")
       ("event,e", value<std::string>(&event), "Type of event [hello,goodbye,wakeup]")
@@ -167,10 +215,10 @@ int main (int argc, const char *argv[])
     notify(vm);
 
     //Open or create the named mutex
-    boost::interprocess::named_mutex mutex(boost::interprocess::open_or_create, "my_mutex");
+    boost::interprocess::named_mutex mutex(boost::interprocess::open_or_create, "audio_node_mutex");
 
     //Parse JSON file
-    std::ifstream i("messages_list.json");
+    std::ifstream i("/home/pi/Projects/audio_node/messages_list.json");
     json j;
     i >> j;
 
@@ -182,9 +230,32 @@ int main (int argc, const char *argv[])
       std::cout << desc << '\n';
     }
 
+    else if(vm.count("download") && vm.count("filename") && vm.count("text"))
+    {
+      std::cout << "File generation and storage selected" << std::endl;
+      //Generate command for python script
+      auto command = generate_command(audio_file, text_given);
+      //Execute python script: TTS and audio download
+      std::cout << "Starting download" << std::endl;
+      system(command.c_str());
+      std::cout << "Download completed" << std::endl;
+    }
+
+    else if(vm.count("download") && vm.count("guest"))
+    {
+      std::cout << "Generate and download guest files" << std::endl;
+      //Update the files for Raul
+      generate_guest(j, "hello",guest_name);    
+      generate_guest(j, "goodbye",guest_name);
+
+      //Inform Node Red about download complete
+      publish_topic("audio_node/download_complete");
+
+    }
+
     else if(vm.count("download"))
     {
-      std::cout << "Download option selected" << std::endl;
+      std::cout << "Parsed download option selected" << std::endl;
       update_files(j,"hello");
       update_files(j,"goodbye");
       update_files(j,"wakeup");
@@ -204,7 +275,9 @@ int main (int argc, const char *argv[])
       //Generate command for python script
       auto command = generate_command(tmp_filename, text_given);
       //Execute python script: TTS and audio download
+      std::cout << "Starting download" << std::endl;
       system(command.c_str());
+      std::cout << "Download completed" << std::endl;
       //Reproduce audio
       play_audio(tmp_filename, std::ref(mutex));
       //Remove audio

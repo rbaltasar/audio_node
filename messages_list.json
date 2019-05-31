@@ -3,7 +3,7 @@
   {
     "raul":
     {
-      "amount_of_sentences": 4,
+      "amount_of_sentences": 9,
       "0": {
         "mode": "TTS",
         "text": "Bienvenido a Casa Raúl"
@@ -17,30 +17,81 @@
         "text": "Hola Raúl, me alegra que vuelvas a casa"
       },
       "3": {
+        "mode": "TTS",
+        "text": "Hola holita Raúl, bienvenido al futuro"
+      },
+      "4": {
         "mode": "music",
-        "text": "/home/raul/Projects/audio_node/sounds/song4.mp3"
+        "text": "/home/pi/Projects/audio_node/sounds/Audience_Applause-Matthiew11-1206899159.mp3"
+      },
+      "5": {
+        "mode": "TTS",
+        "text": "Menos mal que has vuelto Raúl, no sabría qué hacer sin tí"
+      },
+      "6": {
+        "mode": "TTS",
+        "text": "Eres genial Raúl"
+      },
+      "7": {
+        "mode": "TTS",
+        "text": "Hola Raúl. Oh, padre creador. Dime que puedo hacer por tí."
+      },
+      "8": {
+        "mode": "TTS",
+        "text": "Oh dios mío, qué chico más guapo está entrando por la puerta."
       }
-
     },
     "cris":
     {
-      "amount_of_sentences": 3,
-      "0": {
+      "amount_of_sentences": 11,
+     "0": {
         "mode": "TTS",
-        "text": "Bienvenida a Casa Cristina"
+        "text": "Madre mía. Menudo cutis más precioso. No te estarás haciendo por casualidad micro pen?"
       },
-      "1": {
+     "1": {
         "mode": "TTS",
-        "text": "Cuánto tiempo sin verte Cristina! Deja de tirarte pedos"
-      },
+        "text": "Bienvenida a Casa Cristina. Ahora que eres rica, cómprame un cuerpo para que pueda moverme por la casa."
+      },      
       "2": {
         "mode": "TTS",
-        "text": "Hola Cristina, me alegra que vuelvas a casa"
+        "text": "Hola Cristina, bienvenida al mundo del mañana."
+      },
+      "3": {
+        "mode": "TTS",
+        "text": "Sevilla tiene un colo especiaaaaal. Sevilla tiene un colo difereeeente."
+      },
+      "4": {
+        "mode": "TTS",
+        "text": "Oh dios mío Cristina, qué uñas tan preciosas. Te las haces tú misma?"
+      },
+      "5": {
+        "mode": "TTS",
+        "text": "Oi. Qué bolso más bonito. Es de bimba y lola? O de lola y bimba? O de blumble blanble? O de plostos du plostus?"
+      },
+      "6": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/Sevilla_tiene_un_color_especial.mp3"
+      },
+      "7": {
+        "mode": "TTS",
+        "text": "Vaya tipín. Cómo se nota que estás yendo al gimnasio."
+      },
+      "8": {
+        "mode": "TTS",
+        "text": "Bravo Cristina. Si estás oyendo esto es que has sido capaz de pisar bien el felpudo antes de abrir la puerta. Estoy orgullosa."
+      },
+      "9": {
+        "mode": "TTS",
+        "text": "Tú otra vez Cristina?"
+      },
+      "10": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/Rains_of_castamere.mp3"
       }
     },
     "generic":
     {
-      "amount_of_sentences": 3,
+      "amount_of_sentences": 5,
       "0": {
         "mode": "TTS",
         "text": "Bienvenido a casa"
@@ -51,7 +102,27 @@
       },
       "2": {
         "mode": "TTS",
-        "text": "Hola de nuevo!"
+        "text": "Aún no he detectado quien eres. Como seas un ladrón te reviento"
+      },
+      "3": {
+        "mode": "TTS",
+        "text": "Aún no he detectado quien eres. Pero lo haré. Te detectaré. Lo sabré todo de tí. Te miraré mientras duermes. Muha ha ha ha ha ha ha ha muha muha ha."
+      },
+      "4": {
+        "mode": "TTS",
+        "text": "Quién anda ahí?"
+      }
+    },
+    "guest":
+    {
+      "amount_of_sentences": 2,
+      "0": {
+        "mode": "TTS",
+        "text": "Bienvenido a casa <guest_name>"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Hola <guest_name>!"
       }
     }
   },
@@ -91,10 +162,10 @@
     },
     "generic":
     {
-      "amount_of_sentences": 3,
+      "amount_of_sentences": 4,
       "0": {
         "mode": "TTS",
-        "text": "Adiós"
+        "text": "Hasta luegi princesi"
       },
       "1": {
         "mode": "TTS",
@@ -103,6 +174,22 @@
       "2": {
         "mode": "TTS",
         "text": "Chao!"
+      },
+      "3": {
+        "mode": "TTS",
+        "text": "Ai que triste estoy de que te vayas"
+      }
+    },
+    "guest":
+    {
+      "amount_of_sentences": 2,
+      "0": {
+        "mode": "TTS",
+        "text": "Hasta luego <guest_name>"
+      },
+      "1": {
+        "mode": "TTS",
+        "text": "Adios <guest_name>!"
       }
     }
   },
@@ -110,26 +197,63 @@
   {
     "raul":
     {
-      "amount_of_sentences": 1,
+      "amount_of_sentences": 4,
       "0": {
         "mode": "music",
-        "text": "/home/raul/Projects/audio_node/sounds/song.mp3"
-      }
+        "text": "/home/pi/Projects/audio_node/sounds/song.mp3"
+      },
+      "1": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/song1.mp3"
+      },
+      "2": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/song2.mp3"
+      },
+      "3": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/song3.mp3"
+      }	
     },
     "cris":
     {
-      "amount_of_sentences": 1,
+      "amount_of_sentences": 4,
       "0": {
         "mode": "music",
-        "text": "/home/raul/Projects/audio_node/sounds/song2.mp3"
+        "text": "/home/pi/Projects/audio_node/sounds/song.mp3"
+      },
+      "1": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/song1.mp3"
+      },
+      "2": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/song2.mp3"
+      },
+      "3": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/song3.mp3"
       }
+	
     },
     "generic":
     {
-      "amount_of_sentences": 1,
+      "amount_of_sentences": 4,
       "0": {
         "mode": "music",
-        "text": "//home/raul/Projects/audio_node/sounds/song3.mp3"
+        "text": "/home/pi/Projects/audio_node/sounds/Waltz_of_the_flowers.mp3"
+      },
+      "1": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/song2.mp3"
+      },
+      "2": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/song3.mp3"
+      },
+      "3": {
+        "mode": "music",
+        "text": "/home/pi/Projects/audio_node/sounds/Edvard_Grieg_Morning.mp3"
       }
     }
   }
